@@ -426,7 +426,7 @@
         $context  = stream_context_create($opts);
         $result = file_get_contents($this->_hotmail_username_check_url, false, $context);
       }
-      return $result;
+      return $result ?? false;
     }
 
     private function prep_hotmail_fields($cookies){
