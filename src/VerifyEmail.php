@@ -245,11 +245,11 @@
 
       $this->debug[] = 'Adding the email to fields...';
       $fields['yid'] = str_replace('@yahoo.com', '', strtolower($this->email));
-      
+
       $this->debug[] = 'Ready to submit the POST request to validate the email.';
 
       $response = $this->request_validation('yahoo', $cookies, $fields);
-      
+
       $this->debug[] = 'Parsing the response...';
       $response_errors = json_decode($response, true)['errors'];
 
@@ -282,7 +282,7 @@
 
       $this->debug[] = 'Searching username error...';
       $json_response = json_decode($response, true);
-      if(!$json_response['IfExistsResult']){
+      if(isset($json_response['IfExistsResult']) && !$json_response['IfExistsResult']){
         return true;
       }
       return false;
@@ -381,7 +381,7 @@
         $headers[] = 'Referer: https://login.yahoo.com/account/create?specId=yidReg&lang=en-US&src=&done=https%3A%2F%2Fwww.yahoo.com&display=login';
         $headers[] = 'Accept-Encoding: gzip, deflate, br';
         $headers[] = 'Accept-Language: en-US,en;q=0.8,ar;q=0.6';
-      
+
         $cookies_str = implode(' ', $cookies);
         $headers[] = 'Cookie: '.$cookies_str;
 
