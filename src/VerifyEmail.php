@@ -160,13 +160,13 @@
           fclose($this->connect);
 
           $this->debug[] = 'Looking for 250 response...';
-          if(!preg_match("/^250/i", $from) || !preg_match("/^250/i", $to)){
-            $this->debug[] = 'Not found! Email is invalid.';
-            $is_valid = false;
+          if(preg_match("/^250/i", $to)){
+	          $this->debug[] = 'Found! Email is valid.';
+	          $is_valid = true;
           }
           else{
-            $this->debug[] = 'Found! Email is valid.';
-            $is_valid = true;
+	          $this->debug[] = 'Not found! Email is invalid.';
+	          $is_valid = false;
           }
         }
         else {
